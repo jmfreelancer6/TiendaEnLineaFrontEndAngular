@@ -1,0 +1,80 @@
+<div class="padding-1">
+    <div class="card cardJVPlus card-whiteLess card-radius cardJV-padding-2">
+        <div class="row">
+            <div class="col-sm-6">
+                <form [formGroup]="productoColoresSearch" (ngSubmit)="getAllProductosBySearch()">
+                    <div class="input-group">
+                        <span class="input-group-text">Buscar Por:</span>
+                        <input type="text" class="form-control" placeholder="Buscar por productos" name="nombreproducto"
+                            formControlName="nombreproducto">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group d-flex justify-content-end">
+                    <a href="/addProductTienda" class="btn btn-md btn-success">Crear Nuevo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card cardJVPlus cardJV-whiteLess  card-radius cardJV-padding-2">
+        <div class="row">
+            <div class="d-flex justify-content-end">
+                <div class="col-sm-3">
+                    <div class="input-group d-flex justify-content-end">
+                        <span class="input-group-text">Ordenar Por:</span>
+                        <select class="form-select" (change)="OnchangenOrderBy($event)">
+                            <option value="1">Nombre producto ascendente</option>
+                            <option value="2">Nombre producto descendente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3" *ngFor="let ListProductoColore of ListProductoColores.data">
+                <div class="card cardJVPlus card-whiteLess card-radius cardJV-padding-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ListProductoColore.nombreProducto}}</h5>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item"
+                                *ngFor="let productosColores of ListProductoColore.productosColores let i = index;">
+                                <h2 class="accordion-header" id="{{productosColores.id}}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        style="color: white;" [style.background-color]="productosColores.colores.color"
+                                        [attr.data-bs-target]="'#' +productosColores.id + productosColores.colores.nombreColor"
+                                        aria-expanded="true"
+                                        [attr.aria-controls]="'#' + productosColores.id + productosColores.colores.nombreColor">
+                                        Opcion {{productosColores.colores.nombreColor}}
+                                    </button>
+                                </h2>
+                                <div [attr.id]="productosColores.id + productosColores.colores.nombreColor"
+                                    class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        RD$: {{productosColores.precio}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <nav aria-label="Page navigation example">
+                    <ngb-pagination [(page)]="page" [pageSize]="size" [collectionSize]="numElement"
+                        (pageChange)="getProducto()">
+
+                    </ngb-pagination>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

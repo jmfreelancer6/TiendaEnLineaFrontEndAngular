@@ -1,0 +1,14 @@
+<div class="padding-1">
+    <div class="card cardJVPlus card-whiteLess card-radius cardJV-padding-2">
+        <form [formGroup]="producto" (ngSubmit)="edit()">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nombre Producto</label>
+                    <input formControlName="nombreproducto" type="text" class="form-control" name="nombreproducto" maxlength="100">
+                </div>
+            </div>
+            <br>
+            <input type="submit" title="Guardar" value="Guardar" class="btn btn-primary">
+        </form>
+    </div>
+</div>
